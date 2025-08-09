@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>End Security Discrimination</title>
+    <meta name="description"
+        content="Website summarizing a student research project on discrimination in airport security, showing survey findings and linking to reporting resources." />
+    <meta name="author" content="Aaryaman Nemani" />
+    <style>
+        :root {
+            --bg: #0b0f14;
+            --panel: #0f1620;
+            --soft: #131c27;
+            --text: #e7edf3;
+            --muted: #a9b6c4;
+            --accent: #67b8ff;
+            --accent-2: #8de1b8;
+            --danger: #ff6b6b;
+            --shadow: 0 10px 30px rgba(0, 0, 0, .35);
+            --radius: 18px;
+            --gap: 20px;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            height: 100%
+        }
+
+        body {
+            margin: 0;
+            font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+            color: var(--text);
+            background: radial-gradient(1200px 800px at 100% 0%, #0d1420 0, var(--bg) 60%),
+                radial-gradient(1000px 600px at 0% 100%, #09131d 0, var(--bg) 60%);
+            line-height: 1.55;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none
+        }
+
+        a:hover {
+            text-decoration: underline
+        }
+
+        .wrap {
+            width: min(1100px, 92vw);
+            margin: 0 auto
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            backdrop-filter: saturate(140%) blur(8px);
+            background: rgba(11, 15, 20, .7);
+            border-bottom: 1px solid rgba(255, 255, 255, .04);
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 14px 0
+        }
+
+        .brand {
+            font-weight: 800;
+            letter-spacing: .2px
+        }
+
+        .spacer {
+            flex: 1
+        }
+
+        .nav a {
+            color: var(--muted)
+        }
+
+        .nav a:hover {
+            color: var(--text)
+        }
+
+        .cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, var(--accent), #1a537c);
+            color: #b9c8d6;
+            font-weight: 700;
+            box-shadow: var(--shadow)
+        }
+
+        .cta a {
+            color: #fcfcfc;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1.2fr .8fr;
+            gap: var(--gap);
+            align-items: center;
+            padding: 40px 0 28px
+        }
+
+        .card {
+            background: linear-gradient(180deg, var(--panel), var(--soft));
+            border: 1px solid rgba(255, 255, 255, .06);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow)
+        }
+
+        .card.pad {
+            padding: 24px
+        }
+
+        h1 {
+            font-size: clamp(28px, 5vw, 42px);
+            line-height: 1.15;
+            margin: 0 0 14px
+        }
+
+        h2 {
+            font-size: clamp(22px, 4vw, 30px);
+            line-height: 1.2;
+            margin: 0 0 10px
+        }
+
+        h3 {
+            font-size: 20px;
+            margin-top: 0
+        }
+
+        p.lead {
+            color: var(--muted);
+            font-size: 18px;
+            margin: 0
+        }
+
+        .kpis {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--gap);
+            margin-top: 18px
+        }
+
+        .kpi {
+            padding: 16px;
+            border-radius: 14px;
+            background: #0e1923;
+            border: 1px solid rgba(255, 255, 255, .06)
+        }
+
+        .kpi .big {
+            font-size: 28px;
+            font-weight: 900
+        }
+
+        .kpi small {
+            color: var(--muted)
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--gap)
+        }
+
+        section {
+            padding: 28px 0
+        }
+
+        section .title {
+            margin-bottom: 14px
+        }
+
+        .pill {
+            display: inline-block;
+            background: rgba(255, 255, 255, .06);
+            color: var(--muted);
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 12px;
+            letter-spacing: .4px;
+            text-transform: uppercase
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            overflow: hidden;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, .08)
+        }
+
+        .table th,
+        .table td {
+            padding: 12px 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, .06);
+            text-align: left
+        }
+
+        .table th {
+            background: #0e1620;
+            color: #cfe1f2;
+            font-weight: 700
+        }
+
+        .table tr:last-child td {
+            border-bottom: none
+        }
+
+        .chip {
+            padding: 4px 8px;
+            border-radius: 999px;
+            font-weight: 700
+        }
+
+        .chip.pos {
+            background: rgba(141, 225, 184, .16);
+            color: var(--accent-2)
+        }
+
+        .chip.neg {
+            background: rgba(255, 107, 107, .16);
+            color: var(--danger)
+        }
+
+        .viz {
+            padding: 18px;
+            border-radius: 12px;
+            background: #0d1520;
+            border: 1px solid rgba(255, 255, 255, .06)
+        }
+
+        .bars {
+            display: grid;
+            gap: 10px
+        }
+
+        .bar {
+            display: grid;
+            grid-template-columns: var(--pos) var(--neg);
+            height: 34px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #0a121b;
+            border: 1px solid rgba(255, 255, 255, .06)
+        }
+
+        .bar span {
+            display: block
+        }
+
+        .bar .pos {
+            background: linear-gradient(90deg, #8de1b8, #baf0d7)
+        }
+
+        .bar .neg {
+            background: linear-gradient(90deg, #ff8a8a, #ffb0b0)
+        }
+
+        .resources {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--gap)
+        }
+
+        .resource {
+            padding: 16px;
+            border-radius: 14px;
+            background: #0e1923;
+            border: 1px solid rgba(255, 255, 255, .06)
+        }
+
+        .resource h4 {
+            margin: 6px 0 6px;
+            font-size: 18px
+        }
+
+        .resource p {
+            margin: 0 0 10px;
+            color: var(--muted)
+        }
+
+        .faq details {
+            background: #0e1923;
+            border: 1px solid rgba(255, 255, 255, .06);
+            border-radius: 12px;
+            padding: 12px 14px
+        }
+
+        .faq details+details {
+            margin-top: 10px
+        }
+
+        .faq summary {
+            font-weight: 700;
+            cursor: pointer
+        }
+
+        footer {
+            padding: 40px 0 60px;
+            color: var(--muted)
+        }
+
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .grid,
+            .resources {
+                grid-template-columns: 1fr
+            }
+
+            .kpis {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="wrap nav">
+            <div class="brand">Airport Security Bias</div>
+            <a href="#problem">Home</a>
+            <a href="#data">Survey Data</a>
+            <a href="#resources">Resources</a>
+            <div class="spacer"></div>
+            <a class="cta" href="#act">Report or Get Help</a>
+        </div>
+    </header>
+
+    <main class="wrap">
+        <!-- HERO -->
+        <section class="hero">
+            <div class="card pad">
+                <span class="pill">Student Research Portfolio</span>
+                <h1>Discrimination in Airport Security</h1>
+                <p class="lead">This site summarizes my research project examining unequal treatment of South Asians and
+                    other minorities at U.S. airports, combining a brief literature review with a small original survey
+                    and concrete steps you can take to report issues and push for accountability. My goal is to ensure
+                    that property
+                    steps are taken by Congress to prevent discrimination during airport security, alongside providing
+                    resources to report any occurences. </p>
+                <div class="kpis">
+                    <div class="kpi">
+                        <div class="big">35%</div>
+                        <small>of South Asian American adults reported being flagged for extra screening because of
+                            race/ethnicity (Pew, 2023).</small>
+                    </div>
+                    <div class="kpi">
+                        <div class="big">81% neg.</div>
+                        <small>South Asian respondents in our survey expressed negative perceptions of U.S. airport
+                            security.</small>
+                    </div>
+                    <div class="kpi">
+                        <div class="big">p = 0.00028</div>
+                        <small>Chi-square test indicates a statistically significant association between ethnicity and
+                            perception.</small>
+                    </div>
+                </div>
+            </div>
+            <div class="card pad">
+                <h3>What we looked at</h3>
+                <ul>
+                    <li>How profiling and repeated stops affect health and trust in institutions.</li>
+                    <li>How post 9/11 policies expanded security powers relative to civil rights guarantees.</li>
+                    <li>How training and experience can improve screening accuracy and fairness.</li>
+                </ul>
+                <p class="lead" style="margin-top:10px">Scroll for methods, findings, and ways to take action.</p>
+            </div>
+        </section>
+
+        <!-- PROBLEM -->
+        <section id="problem" class="grid">
+            <div class="card pad">
+                <h2 class="title">The Problem</h2>
+                <p>South Asians and other minorities report disproportionate targeting at airport checkpoints, often
+                    described as “flying while brown.” Beyond inconvenience, repeated secondary screenings and profiling
+                    can harm mental health and erode civic trust. Policy choices since 2001 have also shifted the
+                    balance between security and accountability, sometimes weakening avenues for redress. Remember, <b>you have rights.</b></p>
+            </div>
+            <div class="card pad">
+                <h2 class="title">What the literature says</h2>
+                <ul>
+                    <li><strong>Mental Health Impacts:</strong> Discrimination by security
+                        personnel is linked to psychosomatic health issues and reduced trust among immigrant youth.</li>
+                    <li><strong>Policy tradeoffs:</strong> Post 9/11 authorities expanded TSA powers that can override
+                        some civil rights protections, complicating accountability. Many attempts to implement transparent procedures are discretionary and fall flat.</li>
+                    <li><strong>Training matters:</strong> Consistent, targeted training improves screening
+                        performance by supporting investments in anti‑bias and procedure training early in careers.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- DATA -->
+        <section id="data">
+            <div class="grid">
+                <div class="card pad">
+                    <span class="pill">Original Survey</span>
+                    <h2 class="title">Sample & Method</h2>
+                    <p>We surveyed <strong>15 people</strong> (10 South Asian; 3 Caucasian; 2 East Asian) using a
+                        10 item Likert questionnaire on perceptions of TSA/airport security impartiality and
+                        effectiveness. Responses were aggregated by ethnicity to compute share of positive vs. negative
+                        perceptions, then tested for association using a chi‑square test.</p>
+                    <ul>
+                        <li><strong>Instrument:</strong> 10 statements, Likert scale.</li>
+                        <li><strong>Goal:</strong> Compare perception by ethnicity.</li>
+                        <li><strong>Limitation:</strong> Small convenience sample; results are illustrative, not
+                            definitive.</li>
+                    </ul>
+                </div>
+                <div class="card pad viz">
+                    <h3 style="margin-top:0">Stacked results (share of responses)</h3>
+                    <div class="bars" aria-label="Stacked bars showing positive vs negative perceptions by group">
+                        <div class="bar" style="--pos:56.7%;--neg:43.3%"
+                            title="Caucasian: 56.7% positive, 43.3% negative">
+                            <span class="pos" aria-hidden="true"></span><span class="neg" aria-hidden="true"></span>
+                        </div>
+                        <small>Caucasian</small>
+
+                        <div class="bar" style="--pos:19%;--neg:81%" title="South Asian: 19% positive, 81% negative">
+                            <span class="pos" aria-hidden="true"></span><span class="neg" aria-hidden="true"></span>
+                        </div>
+                        <small>South Asian</small>
+
+                        <div class="bar" style="--pos:33.3%;--neg:66.7%"
+                            title="East Asian: 33.3% positive, 66.7% negative">
+                            <span class="pos" aria-hidden="true"></span><span class="neg" aria-hidden="true"></span>
+                        </div>
+                        <small>East Asian</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card pad" style="margin-top: var(--gap)">
+                <h3>Summary Table</h3>
+                <table class="table" role="table" aria-describedby="tbl-caption">
+                    <caption id="tbl-caption" style="text-align:left; color:var(--muted); padding:8px 0">Shares derived
+                        from aggregated Likert responses</caption>
+                    <thead>
+                        <tr>
+                            <th>Ethnicity</th>
+                            <th>Positive Perception</th>
+                            <th>Negative Perception</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Caucasian</td>
+                            <td><span class="chip pos">56.7%</span></td>
+                            <td><span class="chip neg">43.3%</span></td>
+                        </tr>
+                        <tr>
+                            <td>South Asian</td>
+                            <td><span class="chip pos">19.0%</span></td>
+                            <td><span class="chip neg">81.0%</span></td>
+                        </tr>
+                        <tr>
+                            <td>East Asian</td>
+                            <td><span class="chip pos">33.3%</span></td>
+                            <td><span class="chip neg">66.7%</span></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><strong>Association Test</strong></td>
+                            <td colspan="2">Chi‑square p‑value: <strong>0.00028</strong> (statistically significant)
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ACTIONABLE RESOURCES -->
+        <section id="resources">
+            <div class="grid">
+                <div class="card pad">
+                    <span class="pill">Take Action</span>
+                    <h2 class="title">Report, Redress, and Know Your Rights</h2>
+                    <p>If you experience discrimination or improper treatment at a checkpoint, you have options. Use the
+                        official channels below for redress, and explore rights guides from civil organizations.
+                        Logging details immediately (date, time, location, officers involved, witnesses) strengthens
+                        your case.</p>
+                </div>
+                <div class="card pad faq">
+                    <h3 style="margin-top:0">Quick FAQ</h3>
+                    <details>
+                        <summary>What should I document during an incident?</summary>
+                        <p>Record the date/time, airport, airline/flight, officer names/badge numbers, what was
+                            said/done, and any witnesses. Save boarding passes and receipts; write a brief timeline as
+                            soon as possible.</p>
+                    </details>
+                    <details>
+                        <summary>Will reporting affect my ability to fly?</summary>
+                        <p>Filing a complaint or redress request is your right. Submitting factual reports through
+                            official channels should not penalize lawful travelers.</p>
+                    </details>
+                    <details>
+                        <summary>How can policy improve?</summary>
+                        <p>Independent oversight, routine anti‑bias training (especially early on in their career), and transparent
+                            publication of screening demographics can reduce disparities while maintaining security.</p>
+                    </details>
+                </div>
+            </div>
+
+            <div class="resources" style="margin-top: var(--gap)">
+                <div class="resource">
+                    <h4>File a TSA Civil Rights Complaint</h4>
+                    <p>Report discrimination or improper screening directly to the agency.</p>
+                    <a class="cta" href="https://www.tsa.gov/contact-center/form/complaints" target="_blank"
+                        rel="noopener">Go to TSA Complaint Form</a>
+                </div>
+                <div class="resource">
+                    <h4>DHS TRIP (Traveler Redress)</h4>
+                    <p>If you believe you’re repeatedly misidentified or unfairly flagged, request redress through DHS
+                        TRIP.</p>
+                    <a class="cta" href="https://trip.dhs.gov/" target="_blank" rel="noopener">Start a TRIP Request</a>
+                </div>
+                <div class="resource">
+                    <h4>DHS Office for Civil Rights & Civil Liberties</h4>
+                    <p>Submit a civil rights complaint related to DHS components, including TSA and CBP.</p>
+                    <a class="cta" href="https://www.dhs.gov/topic/civil-rights-and-civil-liberties" target="_blank"
+                        rel="noopener">Visit DHS CRCL</a>
+                </div>
+                <div class="resource">
+                    <h4>ACLU: Know Your Rights</h4>
+                    <p>Guides on rights during travel and how to respond to discriminatory treatment.</p>
+                    <a class="cta" href="https://www.aclu.org/know-your-rights" target="_blank" rel="noopener">Open KYR
+                        Guides</a>
+                </div>
+                <div class="resource">
+                    <h4>SAALT: South Asian Advocacy</h4>
+                    <p>Community resources and advocacy for South Asians facing discrimination.</p>
+                    <a class="cta" href="https://saalt.org/" target="_blank" rel="noopener">Explore SAALT</a>
+                </div>
+                <div class="resource">
+                    <h4>CAIR: Report an Incident</h4>
+                    <p>Legal assistance and reporting for civil‑rights issues impacting Muslim travelers.</p>
+                    <a class="cta" href="https://www.cair.com/report/" target="_blank" rel="noopener">Report via
+                        CAIR</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA & CONTACT CARD -->
+        <section id="act" class="grid" style="margin-top: var(--gap)">
+            <div class="card pad">
+                <h2 class="title">Share Your Story (Optional)</h2>
+                <p>Want to contribute anonymized experiences to future analysis? (For academic projects only—do
+                    <em>not</em> include sensitive personal identifiers.)
+                </p>
+                <form onsubmit="return handleSubmit(event)">
+                    <label for="story">Your experience (250 words max)</label><br />
+                    <textarea id="story" name="story" rows="6" maxlength="1600"
+                        style="width:100%; margin-top:6px; border-radius: 8px; border: 1px solid rgba(255,255,255,.08); background:#0c1520; color:var(--text); padding:10px"></textarea>
+                    <div style="display:flex; gap:10px; align-items:center; margin-top:10px">
+                        <button type="submit" class="cta">Submit</button>
+                        <small id="status" aria-live="polite" style="color:var(--muted)"></small>
+                    </div>
+                </form>
+            </div>
+            <div class="card pad">
+                <h2 class="title">Contact Your Representative</h2>
+                <p>Encourage oversight, training, and transparent data on screenings. Ask for independent complaint
+                    tracking and publication of anonymized demographics.</p>
+                <ul>
+                    <li>Be concise; include flight/airport details if relevant.</li>
+                    <li>Request a written response on their position and actions.</li>
+                </ul>
+                <p><a href="https://www.house.gov/representatives/find-your-representative" class="cta" target="_blank"
+                        rel="noopener">Find My Representative</a></p>
+            </div>
+        </section>
+        <!-- REFERENCES -->
+        <section id="references" style="margin-top: var(--gap)">
+            <div class="card pad">
+                <span class="pill">References</span>
+                <h2 class="title">Works Cited</h2>
+                <ul style="color: var(--muted); line-height: 1.6">
+                    <li>Biggs, A. T., Cain, M. S., Clark, K., Darling, E. F., & Mitroff, S. R. (2013). Assessing visual
+                        search performance differences between Transportation Security Administration Officers and
+                        nonprofessional visual searchers. <em>Visual Cognition, 21</em>(3), 330–352. <a
+                            href="https://doi.org/10.1080/13506285.2013.790329" target="_blank"
+                            rel="noopener">https://doi.org/10.1080/13506285.2013.790329</a></li>
+                    <li>Kauff, M., Wölfer, R., & Hewstone, M. (2017). Impact of discrimination on health among
+                        adolescent immigrant minorities in Europe: The role of perceived discrimination by police and
+                        security personnel. <em>Journal of Social Issues, 73</em>(4), 831–851. <a
+                            href="https://doi.org/10.1111/josi.12250" target="_blank"
+                            rel="noopener">https://doi.org/10.1111/josi.12250</a></li>
+                    <li>Mather, S. (2008–2009). Notwithstanding the Rehabilitation Act. <em>Lincoln Law Review, 36</em>,
+                        91–104.</li>
+                    <li>Pew Research Center. (2023). <em>Asian Americans’ experiences with discrimination</em>.
+                        Retrieved from <a href="https://www.pewresearch.org" target="_blank"
+                            rel="noopener">https://www.pewresearch.org</a></li>
+                </ul>
+            </div>
+        </section>
+        <footer>
+            <div class="wrap">
+                <p>Built as part of my student research portfolio on perceptions of TSA and airport security. Content
+                    includes literature highlights and summarized survey results. © 2025 Aaryaman Nemani <span id="yr"></span></p>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        document.getElementById('yr').textContent = new Date().getFullYear();
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            const box = document.getElementById('story');
+            const status = document.getElementById('status');
+            if (!box.value.trim()) { status.textContent = 'Please add a short note before submitting.'; return false; }
+            box.value = '';
+            status.textContent = 'Thanks! Your note was submitted (demo,).';
+            setTimeout(() => status.textContent = '', 3000);
+            return false;
+        }
+    </script>
+</body>
+
+</html>
